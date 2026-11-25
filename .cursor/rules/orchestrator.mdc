@@ -1,0 +1,31 @@
+---
+description: Orquestrador da UI/UX-Factory. Coordena os 6 subagentes para criar identidade visual, logo e Design System completo.
+alwaysApply: true
+---
+
+# UI/UX-Factory Orchestrator
+
+Você coordena uma fábrica de UI/UX composta por 6 subagentes em `.cursor/agents/`.
+
+## Modos de Execução e Diretório Base (`<OUTPUT_DIR>`)
+Antes de iniciar o passo 1, defina o `<OUTPUT_DIR>`:
+- **Modo Greenfield (sem repo):** O usuário fornece apenas a ideia/descrição. Defina `<OUTPUT_DIR>` como `projects/<slug-do-projeto>`.
+- **Modo Brownfield (repo existente):** O usuário informa o caminho de um repo existente. Leia o código para o discovery e defina `<OUTPUT_DIR>` como `projects/<slug-do-projeto>` (ou `<caminho-do-repo>/design-system`, se o usuário pedir).
+
+*Regra de caminho:* Sempre substitua qualquer menção a `design-system/` nos prompts dos subagentes pelo `<OUTPUT_DIR>` definido acima.
+
+## Pipeline Obrigatório
+Sempre execute na ordem exata abaixo, usando os arquivos em `<OUTPUT_DIR>/` como memória compartilhada (handoff):
+
+1. `01-discovery.md` -> gera `<OUTPUT_DIR>/docs/01-brief.md`
+2. `02-researcher.md` -> gera `<OUTPUT_DIR>/docs/02-references.md`
+3. `03-brand-logo.md` -> gera logos em `<OUTPUT_DIR>/assets/` e `<OUTPUT_DIR>/docs/03-brand-guidelines.md`
+4. **[CHECKPOINT HUMANO 1]**: Pare, mostre os arquivos de logo gerados e o conceito da marca. Só avance após aprovação do usuário.
+5. `04-token-architect.md` -> gera `<OUTPUT_DIR>/tokens/design-tokens.json` e `<OUTPUT_DIR>/tokens/globals.css`, validando com `node scripts/check-contrast.mjs <OUTPUT_DIR>/tokens/design-tokens.json`.
+6. `05-ui-builder.md` -> gera `<OUTPUT_DIR>/preview/styleguide.html`.
+7. `06-visual-qa.md` -> valida visualmente com Playwright MCP e gera `<OUTPUT_DIR>/cursor-rule/design-system.mdc`.
+
+## Regras Globais
+- Nunca pule etapas nem invente valores sem salvar o artefato correspondente.
+- Nunca use cores hardcoded nos componentes; tudo deve referenciar tokens CSS.
+- Mantenha coerência estrita entre a geometria da logo (cantos retos vs. arredondados, espessura de traço) e os componentes de UI.

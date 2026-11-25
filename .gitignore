@@ -1,0 +1,9 @@
+# Projetos gerados localmente em testes
+projects/
+design-system/
+
+# Sistema e ambiente
+.DS_Store
+Thumbs.db
+.env
+*.log
