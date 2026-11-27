@@ -21,5 +21,8 @@ done
 # Linka a pasta de scripts
 ln -sfn "$REPO_DIR/scripts" "$CURSOR_DIR/ui-ux-factory/scripts"
 
+# Linka os contratos compartilhados da Layout Factory
+ln -sfn "$REPO_DIR/references" "$CURSOR_DIR/ui-ux-factory/references"
+
 echo "UI/UX-Factory instalada globalmente em $CURSOR_DIR!"
 echo "Reinicie o Cursor (ou recarregue a janela) e digite /uiux no chat de qualquer projeto."

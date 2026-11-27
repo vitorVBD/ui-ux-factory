@@ -7,6 +7,7 @@ $AgentsDest = Join-Path $CursorDir "agents"
 $CommandsDest = Join-Path $CursorDir "commands"
 $FactoryDir = Join-Path $CursorDir "ui-ux-factory"
 $ScriptsDest = Join-Path $FactoryDir "scripts"
+$ReferencesDest = Join-Path $FactoryDir "references"
 
 New-Item -ItemType Directory -Force -Path $AgentsDest, $CommandsDest, $FactoryDir | Out-Null
 
@@ -39,6 +40,12 @@ if (Test-Path $ScriptsDest) {
     Remove-Item $ScriptsDest -Recurse -Force
 }
 New-Item -ItemType Junction -Path $ScriptsDest -Target (Join-Path $RepoDir "scripts") | Out-Null
+
+# Linka os contratos compartilhados da Layout Factory via Junction
+if (Test-Path $ReferencesDest) {
+    Remove-Item $ReferencesDest -Recurse -Force
+}
+New-Item -ItemType Junction -Path $ReferencesDest -Target (Join-Path $RepoDir "references") | Out-Null
 
 Write-Host "UI/UX-Factory instalada globalmente em $CursorDir!" -ForegroundColor Green
 Write-Host "Reinicie o Cursor (ou recarregue a janela) e digite /uiux no chat de qualquer projeto."

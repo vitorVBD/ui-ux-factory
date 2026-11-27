@@ -339,6 +339,13 @@ No Unix, com o symlink do `install.sh`, salvar o Markdown já vale para o próxi
 
 **Windows copiou em vez de linkar.** Sem permissão de symlink, `install.ps1` cai em `Copy-Item` para os Markdown. A pasta `scripts` continua junction. Nesse modo, `git pull` não atualiza os agentes até você rodar o instalador outra vez. Habilitar modo de desenvolvedor no Windows permite symlink de verdade.
 
+
+## UI Layout Factory
+
+O comando complementar `/uiux-layout` cria arquitetura de telas, especificações de composição, protótipos navegáveis, QA visual e handoff. Ele não substitui `/uiux` e não altera código de produção.
+
+Consulte [`docs/UI-LAYOUT-FACTORY.md`](docs/UI-LAYOUT-FACTORY.md) para fluxo, agentes e artefatos.
+
 ## Licença
 
 Este repositório ainda não declara uma licença. Até que um arquivo `LICENSE` exista, os direitos permanecem com o autor.
